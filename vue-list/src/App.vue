@@ -72,7 +72,7 @@ export default {
 }
 
 .button-register{
-    margin-top: 1rem;
+    margin-top: -1rem;
 }
 
 .slider.round {

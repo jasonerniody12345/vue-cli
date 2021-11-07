@@ -37,11 +37,11 @@
       <button
         :disabled="validateRegisterInput === false"
         @click="onSubmitRegister"
-        class="btn btn-primary ml-2"
+        class="btn btn-primary"
       >
         register
       </button>
-      <button @click="onClickBack" class="btn btn-primary">back</button>
+      <button @click="onClickBack" class="btn btn-primary ms-2">back</button>
     </div>
   </div>
 </template>

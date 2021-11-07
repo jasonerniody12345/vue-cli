@@ -25,10 +25,10 @@
       <p>Wrong Username or password</p>
     </div>
     <div class="button-login">
-      <button @click="onSubmitLogin()" class="btn btn-primary">
-        login
+      <button @click="onSubmitLogin()" class="btn btn-primary">login</button>
+      <button @click="onClickRegister" class="btn btn-primary ms-2">
+        register
       </button>
-      <button @click="onClickRegister" class="btn btn-primary ml-2">register</button>
     </div>
   </div>
 </template>
@@ -47,6 +47,12 @@ export default {
   },
   methods: {
     onSubmitLogin() {
+      Swal.fire({
+        title: "Please Wait",
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      })
       axios
         .post("https://vue-mongoose.herokuapp.com/users/login", {
           email: this.emailInput,

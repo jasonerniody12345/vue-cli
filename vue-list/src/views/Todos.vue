@@ -4,19 +4,11 @@
       <h2>{{ title }}</h2>
     </div>
     <div class="add-button">
-      <!-- <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModalCenter"
-      >
-        Launch Demo Modal
-      </button> -->
       <button
         type="button"
         class="btn btn-primary ms-2"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModalCenter"
+        data-bs-target="#todoModal"
       >
         Add Todo List
       </button>
@@ -69,16 +61,16 @@
               <p>
                 <a
                   href="#"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal"
                   @click="onEdit(index)"
                   >Edit</a
                 >
                 |
                 <a
                   href="#"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal"
                   @click="onDelete(index)"
                   >Delete</a
                 >
@@ -88,8 +80,8 @@
         </tbody>
       </table>
       <div
-        class="modal fade"
-        id="exampleModalCenter"
+        class="modal fade in"
+        id="todoModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalCenterTitle"
@@ -103,12 +95,10 @@
               </h5>
               <button
                 type="button"
-                class="close"
-                data-dismiss="modal"
+                class="btn-close"
+                data-bs-dismiss="modal"
                 aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+              ></button>
             </div>
             <div class="modal-body">
               <input
@@ -147,7 +137,7 @@
               <button
                 type="button"
                 class="btn btn-secondary"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
               >
                 Close
               </button>
@@ -155,14 +145,14 @@
                 :disabled="validateContentInput === false"
                 type="button"
                 class="btn btn-primary"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 @click="onSubmit"
               >
                 Add List
               </button>
               <div
-                class="modal fade"
-                id="exampleModalCenter2"
+                class="modal fade in"
+                id="editModal"
                 tabindex="-1"
                 role="dialog"
                 aria-labelledby="exampleModalCenterTitle"
@@ -236,6 +226,55 @@
                   </div>
                 </div>
               </div>
+              <div
+                class="modal fade in"
+                id="deleteModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        Delete Todo List
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        Are you sure you want to delete todo
+                        {{ deleteTodoName }}?
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        @click="onConfirmDelete"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -263,6 +302,8 @@ export default {
       editDueDate: "",
       editStatus: "",
       editDescription: "",
+      deleteTodoName: "",
+      deleteTodoId: "",
     };
   },
   computed: {
@@ -286,11 +327,15 @@ export default {
       Swal.fire("Logged Out!", "Redirecting You To Login Page", "warning");
     },
     onDelete(index) {
-      console.log(index);
-      this.$emit("ondelete", index);
+      this.deleteTodoId = this.list[index]._id;
+      this.deleteTodoName = this.list[index].name;
     },
     onEdit(index) {
-      this.$emit("onedit", index);
+      this.editTodoId = this.editTodoId[index].id,
+      this.editName = this.editName[index].name,
+      this.editDueDate = this.editDueDate[index].dueDate,
+      this.editStatus = this.editStatus[index].editStatus,
+      this.editDescription = this.editDescription[index].description;
     },
     fetchTodoList() {
       axios
@@ -318,8 +363,8 @@ export default {
           {
             name: this.newName,
             description: this.newDescription,
-            status: false,
-            dueDate: this.newDueDate,
+            status: this.newStatus,
+            dueDate: this.DueDate,
           },
           {
             headers: {
@@ -328,21 +373,17 @@ export default {
           }
         )
         .then(() => {
-          // console.log(res)
           (this.newName = ""),
             (this.newDescription = ""),
             (this.dueDate = ""),
             Swal.fire("Sucessfully Added Todo!", "", "success");
-          this.$emit("onsuccesscreate");
+          this.fetchTodoList();
         })
         .catch((err) => {
           console.log(err);
         });
     },
     onSubmitEdit() {
-      // console.log(this.editTodoId)
-      // console.log("=======================")
-      // console.log(this.editTodoId)
       axios
         .put(
           `https://vue-mongoose.herokuapp.com/todos/update/${this.editTodoId}`,
@@ -359,10 +400,26 @@ export default {
           }
         )
         .then(() => {
-          // console.log(this.onEditIndex)
-          // console.log(res)
-          this.$emit("onsuccessedit");
+          this.fetchTodoList();
           Swal.fire("You Updated Recent Todo", "", "success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    onConfirmDelete() {
+      axios
+        .delete(
+          `https://vue-mongoose.herokuapp.com/todos/delete/${this.deleteTodoId}`,
+          {
+            headers: {
+              token: localStorage.getItem("token"),
+            },
+          }
+        )
+        .then(() => {
+          this.$emit("onsuccessdelete");
+          Swal.fire("You Just Deleted The Recent Todo", "", "success");
         })
         .catch((err) => {
           console.log(err);
@@ -373,4 +430,7 @@ export default {
 </script>
 
 <style>
+.modal-content {
+  background-color: white !important;
+}
 </style>

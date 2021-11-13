@@ -32,11 +32,13 @@
         <tbody>
           <tr v-for="(item, index) in list" :key="index">
             <th scope="row">
-              <p
-                v-bind:class="{
-                  'red-text': item.status === false,
-                  'green-text': item.status === true,
-                }"
+              <p v-if="item.status === true"
+                class="green-text"
+              >
+                {{ index + 1 }}
+              </p>
+              <p v-else
+                class="red-text"
               >
                 {{ index + 1 }}
               </p>
@@ -44,6 +46,7 @@
             <td>
               <p>{{ item.name }}</p>
             </td>
+              <template v-if="isMobile === true">
             <td>
               <p>{{ item.description }}</p>
             </td>
@@ -57,6 +60,7 @@
               <p style="color: green">done</p>
             </td>
             <td v-else><p style="color: red">todo</p></td>
+              </template>
             <td>
               <p>
                 <a
@@ -79,203 +83,199 @@
           </tr>
         </tbody>
       </table>
-      <div
-        class="modal fade in"
-        id="todoModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Create Todo List
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
+    </div>
+    <!-- Create Todo Modal -->
+    <div
+      class="modal fade in"
+      id="todoModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Create Todo List
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              class="form-control mt-2"
+              v-model="newName"
+              placeholder="name"
+              @keyup.enter="onSubmit"
+            />
+            <input
+              type="text"
+              class="form-control mt-2"
+              v-model="newDescription"
+              placeholder="description"
+              @keyup.enter="onSubmit"
+            />
+            <input
+              type="date"
+              class="form-control mt-2"
+              v-model="dueDate"
+              @keyup.enter="onSubmit"
+            />
+            <br />
+            <p>Todo or Done</p>
+            <label class="switch">
               <input
-                type="text"
-                class="form-control mt-2"
-                v-model="newName"
-                placeholder="name"
+                type="checkbox"
+                checked
+                v-model="newStatus"
                 @keyup.enter="onSubmit"
               />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              :disabled="validateContentInput === false"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              @click="onSubmit"
+            >
+              Add List
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Todo Modal -->
+    <div
+      class="modal fade in"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Edit Todo List
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="test"
+              class="form-control mt-2"
+              v-model="editName"
+              placeholder="name"
+              @keyup.enter="onSubmitEdit"
+            />
+            <input
+              type="text"
+              class="form-control mt-2"
+              v-model="editDescription"
+              placeholder="description"
+              @keyup.enter="onSubmitEdit"
+            />
+            <input
+              type="date"
+              class="form-control mt-2"
+              v-model="editDueDate"
+              @keyup.enter="onSubmitEdit"
+            />
+            <br />
+            <p>Todo or Done</p>
+            <label class="switch">
               <input
-                type="text"
-                class="form-control mt-2"
-                v-model="newDescription"
-                placeholder="description"
-                @keyup.enter="onSubmit"
+                type="checkbox"
+                checked
+                v-model="editStatus"
+                @keyup.enter="onSubmitEdit"
               />
-              <input
-                class="form-control mt-2"
-                type="date"
-                v-model="dueDate"
-                @keyup.enter="onSubmit"
-              />
-              <br />
-              <p>Todo or Done</p>
-              <label class="switch">
-                <input
-                  type="checkbox"
-                  checked
-                  v-model="newStatus"
-                  @keyup.enter="onSubmit"
-                />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                :disabled="validateContentInput === false"
-                type="button"
-                class="btn btn-primary"
-                data-bs-dismiss="modal"
-                @click="onSubmit"
-              >
-                Add List
-              </button>
-              <div
-                class="modal fade in"
-                id="editModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">
-                        Edit Todo List
-                      </h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <input
-                        type="test"
-                        class="form-control mt-2"
-                        v-model="editName"
-                        placeholder="name"
-                        @keyup.enter="onSubmitEdit"
-                      />
-                      <input
-                        type="text"
-                        class="form-control mt-2"
-                        v-model="editDescription"
-                        placeholder="description"
-                        @keyup.enter="onSubmitEdit"
-                      />
-                      <input
-                        type="date"
-                        class="form-control mt-2"
-                        v-model="editDueDate"
-                        @keyup.enter="onSubmitEdit"
-                      />
-                      <br />
-                      <p>Todo or Done</p>
-                      <label class="switch">
-                        <input
-                          type="checkbox"
-                          checked
-                          v-model="editStatus"
-                          @keyup.enter="onSubmitEdit"
-                        />
-                        <span class="slider round"></span>
-                      </label>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-dismiss="modal"
-                        @click="onSubmitEdit"
-                      >
-                        Save changes
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="modal fade in"
-                id="deleteModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">
-                        Delete Todo List
-                      </h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>
-                        Are you sure you want to delete todo
-                        {{ deleteTodoName }}?
-                      </p>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-dismiss="modal"
-                        @click="onConfirmDelete"
-                      >
-                        Confirm
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              @click="onSubmitEdit"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Delete Todo Modal -->
+    <div
+      class="modal fade in"
+      id="deleteModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Delete Todo List
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete todo {{ deleteTodoName }}?</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              @click="onConfirmDelete"
+            >
+              Confirm
+            </button>
           </div>
         </div>
       </div>
@@ -307,13 +307,16 @@ export default {
     };
   },
   computed: {
-    createdDate: function () {
+    createdDate () {
       return new Date().toLocaleDateString();
     },
-    validateContentInput: function () {
+    validateContentInput () {
       return (
         this.newName !== "" && this.newDescription !== "" && this.dueDate !== ""
       );
+    },
+    isMobile() {
+      return window.innerWidth < 600;
     },
   },
   created() {
@@ -331,11 +334,11 @@ export default {
       this.deleteTodoName = this.list[index].name;
     },
     onEdit(index) {
-      this.editTodoId = this.editTodoId[index].id,
-      this.editName = this.editName[index].name,
-      this.editDueDate = this.editDueDate[index].dueDate,
-      this.editStatus = this.editStatus[index].editStatus,
-      this.editDescription = this.editDescription[index].description;
+      (this.editTodoId = this.list[index]._id),
+        (this.editName = this.list[index].name),
+        (this.editDueDate = this.list[index].dueDate),
+        (this.editStatus = this.list[index].editStatus),
+        (this.editDescription = this.list[index].description);
     },
     fetchTodoList() {
       axios
@@ -364,7 +367,7 @@ export default {
             name: this.newName,
             description: this.newDescription,
             status: this.newStatus,
-            dueDate: this.DueDate,
+            dueDate: this.dueDate,
           },
           {
             headers: {
@@ -384,6 +387,7 @@ export default {
         });
     },
     onSubmitEdit() {
+      console.log(this.editTodoId);
       axios
         .put(
           `https://vue-mongoose.herokuapp.com/todos/update/${this.editTodoId}`,
@@ -418,7 +422,7 @@ export default {
           }
         )
         .then(() => {
-          this.$emit("onsuccessdelete");
+          this.fetchTodoList();
           Swal.fire("You Just Deleted The Recent Todo", "", "success");
         })
         .catch((err) => {

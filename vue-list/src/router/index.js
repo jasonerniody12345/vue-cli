@@ -9,6 +9,10 @@ import Todos from "../views/Todos"
 
 const routes = [
     {
+        path: "/",
+        redirect: "/login"
+    },
+    {
         path: "/login",
         component: Login
     },

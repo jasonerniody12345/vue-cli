@@ -23,9 +23,11 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <template v-if="isMobile === false">
             <th scope="col">Created Date</th>
             <th scope="col">Due Date</th>
             <th scope="col">Status</th>
+            </template>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -46,10 +48,10 @@
             <td>
               <p>{{ item.name }}</p>
             </td>
-              <template v-if="isMobile === true">
             <td>
               <p>{{ item.description }}</p>
             </td>
+              <template v-if="isMobile === false">
             <td>
               <p>{{ createdDate }}</p>
             </td>

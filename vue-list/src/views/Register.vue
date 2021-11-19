@@ -71,6 +71,12 @@ export default {
   },
   methods: {
     onSubmitRegister() {
+      Swal.fire({
+        title: "Please Wait",
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
       if (this.userFullName.length < 6) {
         console.log("Fullname is less than 6 alphabet");
         this.errorMessage = "Fullname is less than 6 alphabet";

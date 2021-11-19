@@ -10,7 +10,7 @@ import Todos from "../views/Todos"
 const routes = [
     {
         path: "/",
-        redirect: "/login"
+        redirect: "/todos"
     },
     {
         path: "/login",

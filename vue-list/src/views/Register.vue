@@ -71,25 +71,28 @@ export default {
   },
   methods: {
     onSubmitRegister() {
-      Swal.fire({
-        title: "Please Wait",
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
       if (this.userFullName.length < 6) {
         console.log("Fullname is less than 6 alphabet");
         this.errorMessage = "Fullname is less than 6 alphabet";
         this.isErrorRegister = true;
+         Swal.hideLoading();
       } else if (this.userEmail.length < 6) {
         console.log("Email is less than 6 alphabet");
         this.errorMessage = "Email is less than 6 alphabet";
         this.isErrorRegister = true;
+        Swal.hideLoading();
       } else if (this.userPass.length < 6) {
         console.log("Password is less than 6 alphabet");
         this.errorMessage = "Password is less than 6 alphabet";
         this.isErrorRegister = true;
+        Swal.hideLoading();
       } else {
+        Swal.fire({
+          title: "Please Wait",
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
         axios
           .post("https://vue-mongoose.herokuapp.com/users/create", {
             name: this.userFullName,

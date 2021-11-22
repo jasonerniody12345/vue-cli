@@ -22,7 +22,7 @@
       />
     </div>
     <div class="login-false" v-if="isError === true">
-      <p>Wrong Username or password</p>
+      <p>{{errorMessage}}</p>
     </div>
     <div class="button-login">
       <button @click="onSubmitLogin()" class="btn btn-primary">login</button>
@@ -36,6 +36,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { USER_LOGIN } from '../constants/api';
 export default {
   name: "LoginForm",
   data() {
@@ -54,7 +55,7 @@ export default {
         },
       })
       axios
-        .post("https://vue-mongoose.herokuapp.com/users/login", {
+        .post(`${USER_LOGIN}`, {
           email: this.emailInput,
           password: this.passInput,
         })
@@ -68,8 +69,11 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err);
-          this.isError = true;
+          console.log(err.response);
+          if (err.response.status == 401) {
+            this.isError = true;
+            this.errorMessage = err.response.data.message
+          }
         });
     },
     onClickRegister() {

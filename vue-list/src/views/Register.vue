@@ -49,6 +49,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { USER_REGISTER } from "../constants/api"
 export default {
   name: "RegisterForm",
   data() {
@@ -75,7 +76,7 @@ export default {
         console.log("Fullname is less than 6 alphabet");
         this.errorMessage = "Fullname is less than 6 alphabet";
         this.isErrorRegister = true;
-         Swal.hideLoading();
+        Swal.hideLoading();
       } else if (this.userEmail.length < 6) {
         console.log("Email is less than 6 alphabet");
         this.errorMessage = "Email is less than 6 alphabet";
@@ -94,7 +95,7 @@ export default {
           },
         });
         axios
-          .post("https://vue-mongoose.herokuapp.com/users/create", {
+          .post(`${USER_REGISTER}`, {
             name: this.userFullName,
             email: this.userEmail,
             password: this.userPass,
@@ -113,7 +114,7 @@ export default {
             });
           })
           .catch((err) => {
-            console.log(err);
+            console.log(err.response);
             this.isError = true;
           });
       }

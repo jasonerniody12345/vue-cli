@@ -227,6 +227,10 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import TodoList from "../components/TodoList.vue";
+import { TODO_GET } from "../constants/api"
+import { TODO_UPDATE } from "../constants/api"
+import { TODO_DELETE } from "../constants/api"
+import { USER_REGISTER } from "../constants/api"
 export default {
   name: "TodosForm",
   components: {
@@ -286,7 +290,7 @@ export default {
     },
     fetchTodoList() {
       axios
-        .get("https://vue-mongoose.herokuapp.com/todos/getTodo", {
+        .get(`${TODO_GET}`, {
           headers: {
             token: localStorage.getItem("token"),
           },
@@ -306,7 +310,7 @@ export default {
     onSubmit() {
       axios
         .post(
-          "https://vue-mongoose.herokuapp.com/todos/create",
+          `${USER_REGISTER}`,
           {
             name: this.newName,
             description: this.newDescription,
@@ -331,10 +335,11 @@ export default {
         });
     },
     onSubmitEdit() {
+      console.log(`${TODO_UPDATE}/${this.editTodoId}`)
       console.log(this.editTodoId);
       axios
         .put(
-          `https://vue-mongoose.herokuapp.com/todos/update/${this.editTodoId}`,
+          `${TODO_UPDATE}/${this.editTodoId}`,
           {
             name: this.editName,
             description: this.editDescription,
@@ -358,7 +363,7 @@ export default {
     onConfirmDelete() {
       axios
         .delete(
-          `https://vue-mongoose.herokuapp.com/todos/delete/${this.deleteTodoId}`,
+          `${TODO_DELETE}/${this.deleteTodoId}`,
           {
             headers: {
               token: localStorage.getItem("token"),

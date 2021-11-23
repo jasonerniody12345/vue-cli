@@ -282,6 +282,7 @@ export default {
       this.deleteTodoName = this.list[index].name;
     },
     onEdit(index) {
+      console.log(this.list[index])
       (this.editTodoId = this.list[index]._id),
         (this.editName = this.list[index].name),
         (this.editDueDate = this.list[index].dueDate),

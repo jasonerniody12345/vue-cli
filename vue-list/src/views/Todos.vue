@@ -21,7 +21,9 @@
       :isMobile="isMobile"
       :isEmpty="isEmpty"
       :list="list"
-      :createdDate="createdDate "
+      :createdDate="createdDate"
+      @onEdit="onEdit"
+      @onDelete="onDelete"
     />
         
     <!-- Create Todo Modal -->
@@ -227,10 +229,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import TodoList from "../components/TodoList.vue";
-import { TODO_GET } from "../constants/api"
-import { TODO_UPDATE } from "../constants/api"
-import { TODO_DELETE } from "../constants/api"
-import { USER_REGISTER } from "../constants/api"
+import { TODO_GET, TODO_CREATE, TODO_UPDATE, TODO_DELETE } from "../constants/api"
 export default {
   name: "TodosForm",
   components: {
@@ -282,7 +281,6 @@ export default {
       this.deleteTodoName = this.list[index].name;
     },
     onEdit(index) {
-      console.log(this.list[index])
       (this.editTodoId = this.list[index]._id),
         (this.editName = this.list[index].name),
         (this.editDueDate = this.list[index].dueDate),
@@ -311,7 +309,7 @@ export default {
     onSubmit() {
       axios
         .post(
-          `${USER_REGISTER}`,
+          `${TODO_CREATE}`,
           {
             name: this.newName,
             description: this.newDescription,
@@ -336,8 +334,8 @@ export default {
         });
     },
     onSubmitEdit() {
-      console.log(`${TODO_UPDATE}/${this.editTodoId}`)
-      console.log(this.editTodoId);
+      // console.log(`${TODO_UPDATE}/${this.editTodoId}`)
+      // console.log(this.editTodoId);
       axios
         .put(
           `${TODO_UPDATE}/${this.editTodoId}`,

@@ -44,6 +44,7 @@ export default {
       emailInput: "",
       passInput: "",
       isError: false,
+      errorMessage: "",
     };
   },
   methods: {
@@ -69,8 +70,9 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err.response);
+          // console.log(err.response);
           if (err.response.status == 401) {
+            Swal.close();
             this.isError = true;
             this.errorMessage = err.response.data.message
           }

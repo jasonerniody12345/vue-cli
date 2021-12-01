@@ -6,11 +6,16 @@ Vue.use(VueRouter)
 import Login from "../views/Login"
 import Register from "../views/Register"
 import Todos from "../views/Todos"
+import Landing from "../views/Landing"
 
 const routes = [
     {
         path: "/",
-        redirect: "/todos"
+        redirect: "/home"
+    },
+    {
+        path: "/landing",
+        component: Landing
     },
     {
         path: "/login",

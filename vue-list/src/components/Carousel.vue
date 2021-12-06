@@ -1,24 +1,29 @@
 <template>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="..." alt="First slide">
+      <img src="https://images.ctfassets.net/awpxl2koull4/3S8NqoNVrGoiqeSWok82CY/6051d7b77f7fcbc730058944d35ba5dc/to_do_list_overwhelm.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Second slide">
+      <img src="https://www.sheknows.com/wp-content/uploads/2018/08/dgldbejjyofmcsfvkfd9.jpeg"  class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
+      <img src="https://api.time.com/wp-content/uploads/2016/01/pen-notepad-2-advice-success-work-to-do-ideas.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 </template>
 

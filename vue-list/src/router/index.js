@@ -11,22 +11,22 @@ import Landing from "../views/Landing"
 const routes = [
     {
         path: "/",
-        redirect: "/home"
-    },
-    {
-        path: "/landing",
+        name: "LandingPage",
         component: Landing
     },
     {
         path: "/login",
+        name: "LoginPage",
         component: Login
     },
     {
         path: "/register",
+        name: "RegisterPage",
         component: Register
     },
     {
         path: "/todos",
+        name: "TodosPage",
         component: Todos
     }
 ]

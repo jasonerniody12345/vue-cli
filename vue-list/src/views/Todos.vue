@@ -271,6 +271,7 @@ export default {
   },
   methods: {
     onClickLogout() {
+      localStorage.clear()
       this.$router.push({
         path: "/login",
       });

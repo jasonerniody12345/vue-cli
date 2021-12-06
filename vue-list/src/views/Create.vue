@@ -79,6 +79,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 export default {
+  name: "CreateForm",
     data() {
             return {
                 newName: "",

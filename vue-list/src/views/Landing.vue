@@ -1,5 +1,10 @@
 <template>
-    <Carousel/>
+<div>
+    <Carousel></Carousel>
+    <div class="title">
+        <h1>About Us</h1>
+    </div>
+</div>
 </template>
 
 <script>
@@ -14,5 +19,7 @@ export default {
 
 
 <style>
-
+.title {
+  
+}
 </style>

@@ -69,7 +69,7 @@
 
 <script>
 export default {
-    name: "TodoList",
+    name: "TodoListForm",
     props: ["isMobile", "isEmpty", "list", "createdDate"],
     data() {
         return {

@@ -1,27 +1,57 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <img
-      src="https://simg.nicepng.com/png/small/197-1973592_free-checklist-icon-png-logo-to-do-list.png"
+      src="https://thumbs.dreamstime.com/b/v-164210403.jpg"
       width="30"
       height="30"
       class="d-inline-block align-top"
-      alt=""
+      alt="navbar icon"
     />
-    <a class="navbar-brand" href="/home">Navbar</a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
+    <a class="navbar-brand" href="#" @click="landingPage">Todo</a>
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="#">About Us</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login / Register</a>
-      </li>
+        <a class="nav-link login-btn" href="#" v-if="currentRouteName == 'LandingPage'" @click="loginPage">Login / Register</a>
+        <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'LoginPage'">Welcome Current Member!</p>
+        <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'RegisterPage'">Howdy New Member!</p>
+        <a class="nav-link login-btn" href="#" v-else @click="logOut">Logout</a>
+        <div>{{ $route.name }}</div>
     </ul>
   </nav>
 </template>
 
+<script>
+import Swal from "sweetalert2";
+export default {
+    name: "Navbar",
+    computed: {
+        currentRouteName() {
+            return this.$route.name;
+        }
+    },
+    methods: {
+        loginPage () {
+            this.$router.push("./login")
+        },
+        logOut () {
+            localStorage.clear()
+            this.$router.push("./login")
+            Swal.fire("Logged Out!", "Redirecting You To Login Page", "warning");
+
+        },
+        landingPage () {
+            this.$router.push("./landing")
+        }
+    }
+}
+</script>
+
 <style>
+.login-btn {
+    position: absolute;
+    right: 0;
+    padding-right: 1rem;
+}
 </style>

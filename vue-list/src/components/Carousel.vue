@@ -6,14 +6,14 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
+    <div class="carousel-item">
+      <img src="../assets/triple.jpg"  class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/rain.jpg" class="d-block w-100" alt="...">
+    </div>
     <div class="carousel-item active">
-      <img src="https://images.ctfassets.net/awpxl2koull4/3S8NqoNVrGoiqeSWok82CY/6051d7b77f7fcbc730058944d35ba5dc/to_do_list_overwhelm.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.sheknows.com/wp-content/uploads/2018/08/dgldbejjyofmcsfvkfd9.jpeg"  class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://api.time.com/wp-content/uploads/2016/01/pen-notepad-2-advice-success-work-to-do-ideas.jpg" class="d-block w-100" alt="...">
+      <img src="../assets/night.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

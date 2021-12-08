@@ -11,13 +11,13 @@
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="#">Features</a>
       </li>
         <a class="nav-link login-btn" href="#" v-if="currentRouteName == 'LandingPage'" @click="loginPage">Login / Register</a>
         <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'LoginPage'">Welcome Current Member!</p>
-        <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'RegisterPage'">Howdy New Member!</p>
+        <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'RegisterPage'">Welcome New Member!</p>
         <a class="nav-link login-btn" href="#" v-else @click="logOut">Logout</a>
-        <div>{{ $route.name }}</div>
+        <!-- <div>{{ $route.name }}</div> -->
     </ul>
   </nav>
 </template>
@@ -42,7 +42,7 @@ export default {
 
         },
         landingPage () {
-            this.$router.push("./landing")
+            this.$router.push("./")
         }
     }
 }

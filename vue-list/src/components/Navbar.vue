@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <img
       src="https://thumbs.dreamstime.com/b/v-164210403.jpg"
       width="30"
@@ -11,9 +11,9 @@
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#features_section">Features</a>
       </li>
-        <a class="nav-link login-btn" href="#" v-if="currentRouteName == 'LandingPage'" @click="loginPage">Login / Register</a>
+        <a class="nav-link login-btn me-2" href="#" v-if="currentRouteName == 'LandingPage'" @click="loginPage">Login / Register</a>
         <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'LoginPage'">Welcome Current Member!</p>
         <p class="nav-link login-btn" href="#" v-else-if="currentRouteName == 'RegisterPage'">Welcome New Member!</p>
         <a class="nav-link login-btn" href="#" v-else @click="logOut">Logout</a>
@@ -50,8 +50,12 @@ export default {
 
 <style>
 .login-btn {
-    position: absolute;
-    right: 0;
-    padding-right: 1rem;
+  position: absolute;
+  right: 0;
+  padding-right: 1rem;
+}
+
+.navbar {
+  justify-content: normal;
 }
 </style>

@@ -3,17 +3,19 @@
     <Carousel></Carousel>
     <div class="text-center mt-5">
       <section id="features_section"><h1>Features</h1></section>
-      <div class="overflow-hidden mt-5">
+      <div class="overflow-hidden mt-5 bg-dark">
         <div class="row gx-5 px-5 py-5">
           <div :class="isMobile ? 'col-12' : 'col-6'">
             <img
+              data-aos="fade-right"
+              data-aos-duration="1000"
               src="https://thetodo.net/_nuxt/img/undraw_file_sync_ot38.e7c095c.svg"
               atl="..."
-              :class="{'desktop': !isMobile, 'mobile': isMobile}"
+              :class="{ desktop: !isMobile, mobile: isMobile }"
             />
           </div>
           <div :class="isMobile ? 'col-12' : 'col-6'">
-            <div class="p-3 text-start mt-5 width-500">
+            <div class="p-3 text-start mt-5 width-500 text-white">
               <h3>Simply sync with Google Tasks</h3>
               ToDo for Google is an application for users who want to use Google
               Tasks with Desktop. You can add, edit and delete tasks that can be
@@ -35,24 +37,28 @@
           </div>
           <div :class="isMobile ? 'col-12' : 'col-6'">
             <img
+              data-aos="fade-left"
+              data-aos-duration="1000"
               src="https://thetodo.net/_nuxt/img/fullscreen.beb32a3.webp"
               atl="..."
-              :class="{'desktop': !isMobile, 'mobile': isMobile}"
+              :class="{ desktop: !isMobile, mobile: isMobile }"
             />
           </div>
         </div>
       </div>
-      <div class="overflow-hidden mt-5">
+      <div class="overflow-hidden mt-5 bg-dark">
         <div class="row gx-5 px-5 py-5">
           <div class="col-6">
             <img
+              data-aos="fade-right"
+              data-aos-duration="1000"
               src="https://thetodo.net/_nuxt/img/undraw_web_search_eetr.54994a7.svg"
               atl="..."
-              :class="{'desktop': !isMobile, 'mobile': isMobile}"
+              :class="{ desktop: !isMobile, mobile: isMobile }"
             />
           </div>
           <div :class="isMobile ? 'col-12' : 'col-6'">
-            <div class="p-3 text-start mt-5 width-500">
+            <div class="p-3 text-start mt-5 width-500 text-white">
               <h3>Full-text search available for all tasks</h3>
               You can search from all tasks by entering a keyword. You can
               quickly find a task that you do not know where you went. You can
@@ -74,24 +80,28 @@
           </div>
           <div class="col-6">
             <img
+              data-aos="fade-left"
+              data-aos-duration="1000"
               src="https://thetodo.net/_nuxt/img/undraw_schedule_pnbk.90b84f1.svg"
               atl="..."
-              :class="{'desktop': !isMobile, 'mobile': isMobile}"
+              :class="{ desktop: !isMobile, mobile: isMobile }"
             />
           </div>
         </div>
       </div>
-      <div class="overflow-hidden mt-5">
+      <div class="overflow-hidden mt-5 bg-dark">
         <div class="row gx-5 px-5 py-5">
           <div class="col-6">
             <img
+              data-aos="fade-right"
+              data-aos-duration="1000"
               src="https://thetodo.net/_nuxt/img/undraw_access_account_99n5.0924830.svg"
               atl="..."
-              :class="{'desktop': !isMobile, 'mobile': isMobile}"
+              :class="{ desktop: !isMobile, mobile: isMobile }"
             />
           </div>
           <div :class="isMobile ? 'col-12' : 'col-6'">
-            <div class="p-3 text-start mt-5 width-500">
+            <div class="p-3 text-start mt-5 width-500 text-white">
               <h3>Do not send data to non-Google servers</h3>
               Data is sent directly to Google's servers and not to any other
               server. Therefore, the data is completely closed only on your
@@ -105,26 +115,52 @@
           </div>
         </div>
       </div>
+      <div class="overflow-hidden mt-5">
+        <div class="row gx-5 px-5 py-5">
+          <div :class="isMobile ? 'col-12' : 'col-6'">
+            <div class="p-3 text-start mt-5 width-500">
+              <h3>You can add tasks with global shortcuts</h3>
+              Press "Command(Control) + Shift + A" and a popup will appear to
+              add the task. As soon as you add a task there, it will be
+              reflected in the Google To-Do list. You can add tasks as soon as
+              you come up with a task while you are doing something else.
+            </div>
+          </div>
+          <div class="col-6">
+            <img
+              data-aos="fade-left"
+              data-aos-duration="1000"
+              src="https://thetodo.net/_nuxt/img/undraw_progress_tracking_7hvk.2af5f99.svg"
+              atl="..."
+              :class="{ desktop: !isMobile, mobile: isMobile }"
+            />
+          </div>
+        </div>
+      </div>
     </div>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
 <script>
 import Carousel from "../components/Carousel.vue";
+// import Footer from "../components/Footer.vue"
+import AOS from "aos";
 export default {
   name: "LandingPage",
   // props: ["isMobile"],
   components: {
     Carousel,
+    // Footer,
   },
   computed: {
-      isMobile() {
+    isMobile() {
       return window.innerWidth < 500;
-    }
-  }
+    },
+  },
 };
+AOS.init();
 </script>
-
 
 <style>
 .desktop {

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <img
-      src="https://thumbs.dreamstime.com/b/v-164210403.jpg"
+      src="https://thetodo.net/_nuxt/img/icon.fedfcdd.png"
       width="30"
       height="30"
       class="d-inline-block align-top ms-2"
@@ -15,9 +15,9 @@
         <a class="nav-link" href="#features_section" v-else></a>
       </li>
         <a class="nav-link login-btn me-2" href="#" v-if="currentRouteName == 'LandingPage'" @click="loginPage">Login / Register</a>
-        <p class="nav-link login-btn me-2" href="#" v-else-if="currentRouteName == 'LoginPage'">Welcome Current Member!</p>
-        <p class="nav-link login-btn me-2" href="#" v-else-if="currentRouteName == 'RegisterPage'">Welcome New Member!</p>
-        <a class="nav-link login-btn me-2" href="#" v-else @click="logOut">Logout</a>
+        <p class="nav-link login-btn me-2 greetings" href="#" v-else-if="currentRouteName == 'LoginPage'">Welcome Current Member!</p>
+        <p class="nav-link login-btn me-2 greetings" href="#" v-else-if="currentRouteName == 'RegisterPage'">Welcome New Member!</p>
+        <a class="nav-link login-btn me-2 logout" href="#" v-else @click="logOut">Logout</a>
         <!-- <div>{{ $route.name }}</div> -->
     </ul>
   </nav>
@@ -43,6 +43,7 @@ export default {
 
         },
         landingPage () {
+            localStorage.clear()
             this.$router.push("./")
         }
     }
@@ -58,5 +59,13 @@ export default {
 
 .navbar {
   justify-content: normal;
+}
+
+.greetings {
+  margin-top: -10px;
+}
+
+.logout {
+  margin-top: -10px;
 }
 </style>

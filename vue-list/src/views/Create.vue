@@ -123,4 +123,10 @@ export default {
 </script>
 
 <style>
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
 </style>

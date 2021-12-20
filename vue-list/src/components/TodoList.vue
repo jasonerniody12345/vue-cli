@@ -71,6 +71,11 @@
 export default {
     name: "TodoListForm",
     props: ["isMobile", "isEmpty", "list", "createdDate"],
+    computed: {
+      currentRouteName() {
+        return this.$route.name;
+      }
+    },
     data() {
         return {
             onEdit(index){
@@ -83,3 +88,17 @@ export default {
     }
 }
 </script>
+
+<style>
+.table {
+  margin-top: 1rem;
+}
+
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+</style>>

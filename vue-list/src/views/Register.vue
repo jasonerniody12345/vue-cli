@@ -127,5 +127,14 @@ export default {
   },
 };
 </script>
+
 <style>
+.register-false {
+  color: rgb(160, 23, 23);
+  /* margin-top: -20%; */
+}
+
+.button-register {
+  margin-top: -1rem;
+}
 </style>

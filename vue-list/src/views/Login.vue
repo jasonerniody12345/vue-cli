@@ -88,4 +88,30 @@ export default {
 </script>
 
 <style>
+.is-logged-out {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 17%;
+}
+
+.is-logged-in {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 5%;
+  align-items: center;
+}
+
+.login-false {
+  color: rgb(160, 23, 23);
+  margin-top: 1%;
+}
+
+.button-login {
+  margin-top: 1rem;
+}
+
+
 </style>

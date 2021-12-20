@@ -386,4 +386,15 @@ export default {
 .modal-content {
   background-color: white !important;
 }
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.add-button {
+  margin-top: 1rem;
+}
 </style>

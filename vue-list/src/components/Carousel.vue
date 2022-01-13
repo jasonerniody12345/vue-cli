@@ -56,7 +56,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div> -->
-  <vueper-slides autoplay fixed-height="500px">
+  <vueper-slides autoplay :fixed-height="!isMobile ? '600px' : '700px'">
     <vueper-slide 
       v-for="(slide, i) in slides"
       :key="i"
@@ -77,18 +77,12 @@ export default {
   data: () => ({
     slides: [
       {
-        title: "Slide #1",
-        content: "Slide content.",
         image: require('../assets/triple.jpg')
       },
       {
-        title: "Slide #2",
-        content: "Slide content.",
         image: require('../assets/rain.jpg')
       },
       {
-        title: "Slide #3",
-        content: "Slide content.",
         image: require('../assets/night.jpg')
       },
     ],
@@ -102,8 +96,4 @@ export default {
 </script>
 
 <style>
-.mobile{
-  height: 300px;
-  width: 300px;
-}
 </style>

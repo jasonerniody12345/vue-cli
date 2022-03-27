@@ -17,7 +17,8 @@
     "sweetalert2": "^11.1.9",
     "vue": "^2.6.11",
     "vue-router": "^3.5.3",
-    "vueperslides": "^2.15.2"
+    "vueperslides": "^2.15.2",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/babel-preset-app": "^4.5.15",

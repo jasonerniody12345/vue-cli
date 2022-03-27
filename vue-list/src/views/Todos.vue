@@ -16,7 +16,6 @@
         Logout
       </button> -->
     </div>
-
     <TodoList
       :isMobile="isMobile"
       :isEmpty="isEmpty"
@@ -228,10 +227,15 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import {mapState} from "vuex";
 import TodoList from "../components/TodoList.vue";
 import { TODO_GET, TODO_CREATE, TODO_UPDATE, TODO_DELETE } from "../constants/api"
 export default {
   name: "TodosForm",
+  created() {
+    // call actions
+    this.$store.dispatch("setIsMobile", window.innerWidth < 600)
+  },
   components: {
     TodoList
   },
@@ -262,9 +266,10 @@ export default {
         this.newName !== "" && this.newDescription !== "" && this.dueDate !== ""
       );
     },
-    isMobile() {
-      return window.innerWidth < 600;
-    },
+    // isMobile() {
+    //   return window.innerWidth < 600;
+    // },
+    ...mapState(["isMobile"])
   },
   created() {
     this.fetchTodoList();

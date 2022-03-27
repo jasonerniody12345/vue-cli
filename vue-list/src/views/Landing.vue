@@ -143,20 +143,25 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 import Carousel from "../components/Carousel.vue";
-// import Footer from "../components/Footer.vue"
 import AOS from "aos";
 export default {
   name: "LandingPage",
+  created() {
+    // call actions
+    this.$store.dispatch("setIsMobile", window.innerWidth < 500)
+  },
   // props: ["isMobile"],
   components: {
     Carousel,
-    // Footer,
   },
   computed: {
-    isMobile() {
-      return window.innerWidth < 500;
-    },
+    // isMobile() {
+    //   return window.innerWidth < 500;
+    // },
+    // call data state
+    ...mapState(["isMobile"])
   },
 };
 AOS.init();

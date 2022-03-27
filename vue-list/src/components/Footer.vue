@@ -9,7 +9,7 @@
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fa fa-twitter-square colors" aria-hidden="true"></i></a>
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fa fa-facebook-square ms-2 colors" aria-hidden="true"></i></a>
         </div> -->
-        <div class="text-center p-3">© 2021 Copyright: Mantoel.Inc</div>
+        <div class="text-center p-3">jasonerniody36@gmail.com</div>
         <!-- </div> -->
     </footer>
     </div>
@@ -21,7 +21,7 @@
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fa fa-twitter-square colors" aria-hidden="true"></i></a>
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fa fa-facebook-square ms-2 colors" aria-hidden="true"></i></a>
         </div> -->
-    <div class="text-center p-3">© 2021 Copyright: Mantoel.Inc</div>
+    <div class="text-center p-3">jasonerniody36@gmail.com</div>
     </footer>
     </div>
 </div>

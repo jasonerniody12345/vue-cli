@@ -68,25 +68,32 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
 export default {
-    name: "TodoListForm",
-    props: ["isMobile", "isEmpty", "list", "createdDate"],
-    computed: {
-      currentRouteName() {
-        return this.$route.name;
-      }
+  name: "TodoListForm",
+  created() {
+    // call actions
+    this.$store.dispatch("setIsMobile", window.innerWidth < 600);
+  },
+  //"isMobile" tambain di props
+  props: ["isEmpty", "list", "createdDate"],
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
     },
-    data() {
-        return {
-            onEdit(index){
-                this.$emit("onEdit", index)
-            },
-            onDelete(index){
-                this.$emit("onDelete", index)
-            }
-        }
-    }
-}
+    ...mapState(["isMobile"])
+  },
+  data() {
+    return {
+      onEdit(index) {
+        this.$emit("onEdit", index);
+      },
+      onDelete(index) {
+        this.$emit("onDelete", index);
+      },
+    };
+  },
+};
 </script>
 
 <style>

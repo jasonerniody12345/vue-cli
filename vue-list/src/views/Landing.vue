@@ -2,7 +2,7 @@
   <div>
     <Carousel></Carousel>
     <div class="text-center mt-5">
-      <section id="features_section"><h1>Email jasonerniody36@gmail.com</h1></section>
+      <section id="features_section"><h1>Features</h1></section>
       <div class="overflow-hidden mt-5 bg-light">
         <div class="row gx-5 px-5 py-5">
           <div :class="isMobile ? 'col-12' : 'col-6'">
